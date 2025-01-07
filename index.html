@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pay by Card</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    button {
+      font-size: 2rem;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <button id="payButton">PAY BY CARD</button>
+
+  <script>
+    // Extract URL parameters
+    function getHashAttributes() {
+      const hash = window.location.hash.slice(1); // Remove the #
+      const params = new URLSearchParams(hash);
+      const attributes = {
+        months: params.get('attribute_months') || '6',
+        level: params.get('attribute_level') || 'Quality',
+        aff: params.get('aff') || 'funky' // Default to 'funky' if not provided
+      };
+      return attributes;
+    }
+
+    // Build URL and set button behavior
+    function initializeButton() {
+      const attributes = getHashAttributes();
+
+      // Construct payment URL (example placeholder)
+      const paymentUrl = `https://hugs.land/get/hug/?attribute_months=${attributes.months}&attribute_level=${attributes.level}&aff=${attributes.aff}`;
+      
+
+      // Update button action
+      const button = document.getElementById('payButton');
+      button.addEventListener('click', () => {
+        window.location.href = paymentUrl;
+      });
+    }
+
+    // Initialize on page load
+    initializeButton();
+  </script>
+</body>
+</html>
